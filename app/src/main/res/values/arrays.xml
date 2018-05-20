@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="hawk_language_subtitle_values_2char" translatable="false">
+        <!-- None -->
+        <item>none</item>
+        <!-- English    eng    ISO-639-1 -->
+        <item>en</item>
+        <!-- Assamese    asm    ISO-639-1 -->
+        <item>as</item>
+        <!-- Bahasa Indonesia    ind    ISO-639-1 -->
+        <item>id</item>
+        <!-- Bahasa Malaysia    msa    ISO-639-1 -->
+        <item>my</item>
+        <!-- Bengali    ben    ISO-639-1 -->
+        <item>bn</item>
+        <!-- Bhojpuri    bho    ISO-639-2 -->
+        <item>bho</item>
+        <!-- Chhattisgarhi    hne    ISO-639-2 -->
+        <item>hne</item>
+        <!-- Gujarati    guj    ISO-639-1 -->
+        <item>gu</item>
+        <!-- Japanese    jpn    ISO-639-1 -->
+        <item>ja</item>
+        <!-- Hindi    hin    ISO-639-1 -->
+        <item>hi</item>
+        <!-- Kannada    kan    ISO-639-1 -->
+        <item>kn</item>
+        <!-- Konkani    kok    ISO-639-2 -->
+        <item>kok</item>
+        <!-- Korean    kor    ISO-639-1 -->
+        <item>ko</item>
+        <!-- Marathi    mar    ISO-639-1 -->
+        <item>mr</item>
+        <!-- Malayalam    mal    ISO-639-1 -->
+        <item>ml</item>
+        <!-- Oriya    ori    ISO-639-1 -->
+        <item>or</item>
+        <!-- Punjabi    pan    ISO-639-1 -->
+        <item>pa</item>
+        <!-- Sindhi    snd    ISO-639-1 -->
+        <item>sd</item>
+        <!-- Tagalog    tgl    ISO-639-1 -->
+        <item>tl</item>
+        <!-- Tamil    tam    ISO-639-1 -->
+        <item>ta</item>
+        <!-- Telugu    tel    ISO-639-1 -->
+        <item>te</item>
+        <!-- Thai    tha    ISO-639-1 -->
+        <item>th</item>
+        <!-- Simplified Chinese    hans    ISO 15924 -->
+        <item>hans</item>
+        <!-- Traditional Chinese    hant    ISO 15924 -->
+        <item>hant</item>
+    </string-array>
+
+    <string-array name="hawk_language_subtitle">
+        <!-- None -->
+        <item>@string/no_subtitle</item>
+        <!-- English    eng    ISO-639-2 -->
+        <item>English</item>
+        <!-- Assamese    asm    ISO-639-2 -->
+        <item>Assamese</item>
+        <!-- Bahasa Indonesia    ind    ISO-639-2 -->
+        <item>Bahasa Indonesia</item>
+        <!-- Bahasa Malaysia    msa    ISO-639-2 -->
+        <item>Bahasa Malaysia</item>
+        <!-- Bengali    ben    ISO-639-2 -->
+        <item>Bengali</item>
+        <!-- Bhojpuri    bho    ISO-639-2 -->
+        <item>Bhojpuri</item>
+        <!-- Chhattisgarhi    hne    ISO-639-2 -->
+        <item>Chhattisgarhi</item>
+        <!-- Gujarati    guj    ISO-639-2 -->
+        <item>Gujarati</item>
+        <!-- Japanese    jpn    ISO-639-2 -->
+        <item>Japanese</item>
+        <!-- Hindi    hin    ISO-639-2 -->
+        <item>Hindi</item>
+        <!-- Kannada    kan    ISO-639-2 -->
+        <item>Kannada</item>
+        <!-- Konkani    kok    ISO-639-2 -->
+        <item>Konkani</item>
+        <!-- Korean    kor    ISO-639-2 -->
+        <item>Korean</item>
+        <!-- Marathi    mar    ISO-639-2 -->
+        <item>Marathi</item>
+        <!-- Malayalam    mal    ISO-639-2 -->
+        <item>Malayalam</item>
+        <!-- Oriya    ori    ISO-639-2 -->
+        <item>Oriya</item>
+        <!-- Punjabi    pan    ISO-639-2 -->
+        <item>Punjabi</item>
+        <!-- Sindhi    snd    ISO-639-2 -->
+        <item>Sindhi</item>
+        <!-- Tagalog    tgl    ISO-639-2 -->
+        <item>Tagalog</item>
+        <!-- Tamil    tam    ISO-639-2 -->
+        <item>Tamil</item>
+        <!-- Telugu    tel    ISO-639-2 -->
+        <item>Telugu</item>
+        <!-- Thai    tha    ISO-639-2 -->
+        <item>Thai</item>
+        <!-- Simplified Chinese    hans    ISO 15924 -->
+        <item>Simplified Chinese</item>
+        <!-- Traditional Chinese    hant    ISO 15924 -->
+        <item>Traditional Chinese</item>
+    </string-array>
+</resources>
