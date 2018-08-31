@@ -19,6 +19,7 @@ import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -35,6 +36,7 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MediaSourceEventListener;
 import com.google.android.exoplayer2.source.MergingMediaSource;
+import com.google.android.exoplayer2.source.SingleSampleMediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.source.dash.DashMediaSource;
 import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
@@ -49,6 +51,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
+import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.util.Util;
 
 import java.net.CookieHandler;
@@ -276,7 +279,17 @@ public class PlayerActivity extends BaseActivity {
         /* MediaSource for subtitle */
         for (int i = 0; i < mSubtitles.size(); i++) {
             TextTrackItem subtitle = mSubtitles.get(i);
-            listSources.add(buildMediaSource(Uri.parse(subtitle.getUri()), getExtension(subtitle.getUri()), mMainHandler, mEventLogger));
+            Format subtitleFormat = Format.createTextSampleFormat(
+                    null,
+                    MimeTypes.TEXT_VTT,
+                    0,
+                    null);
+
+            MediaSource textMediaSource = new SingleSampleMediaSource(
+                    Uri.parse(subtitle.getUri().replace(".m3u8", ".vtt")), //testing purpose
+                    mMediaDataSourceFactory,
+                    subtitleFormat,
+                    C.TIME_UNSET);
         }
 
         /* Merging all of sources */

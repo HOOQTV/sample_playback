@@ -21,12 +21,15 @@ public class BaseUrlSelector {
     public final static int ENVIRONMENT_PROD = 0;
     public final static int ENVIRONMENT_STAGGING = 1;
 
+    private final String ENDPOINT_API_SANDBOX_HOOQ = "api-sandbox.hooq.tv";
+    private final String ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ = "cdn-discover-nightly.hooq.tv";
+
     private HashMap<String,String> sha256s;
 
     public BaseUrlSelector() {
         sha256s = new HashMap<>();
-        sha256s.put("api-sandbox.hooq.tv", "fZLR0JanpIxFSkXKll2JUYGNb17e3LgANdc2r8RGfp8=");
-        sha256s.put("cdn-discover-nightly.hooq.tv", "BNuRyzgv5Gr31DQR6HiVJro5PLelDYdwJFOIuXF/FRg=");
+        sha256s.put(ENDPOINT_API_SANDBOX_HOOQ, "fZLR0JanpIxFSkXKll2JUYGNb17e3LgANdc2r8RGfp8=");
+        sha256s.put(ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ, "BNuRyzgv5Gr31DQR6HiVJro5PLelDYdwJFOIuXF/FRg=");
     }
 
     public void setEnvironment(int envSelected) {
@@ -41,14 +44,14 @@ public class BaseUrlSelector {
         String result = null;
         switch (mEnvSelected) {
             case ENVIRONMENT_STAGGING:
-                result = "api-sandbox.hooq.tv/";
+                result = ENDPOINT_API_SANDBOX_HOOQ + "/";
                 break;
         }
         return httpModificator(result);
     }
 
     public String getCDNDiscoverBasePath() {
-        return httpModificator("cdn-discover-nightly.hooq.tv");
+        return httpModificator(ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ);
     }
 
     private String httpModificator(String s) {
