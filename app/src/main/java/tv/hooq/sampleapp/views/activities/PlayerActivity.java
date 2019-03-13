@@ -305,11 +305,11 @@ public class PlayerActivity extends BaseActivity {
             mPlayer.seekTo(mResumeWindow, mResumeWindow);
         }
         ConvivaTrackingManager.getInstance().startTracking(new PlayManifest(
-                mMovieData.getTitle(),
-                mMovieData.getRunningTime(),
-                "user-id",
-                "sample-user-sku-paid-hotstar20k",
-                manifestResponse.getData().getContent()),
+                        mMovieData.getTitle(),
+                        mMovieData.getRunningTime(),
+                        "user-id",
+                        "sample-user-sku-paid-hotstar20k",
+                        manifestResponse.getData().getContent()),
                 mPlayer);
 
 

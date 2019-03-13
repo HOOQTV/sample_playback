@@ -40,11 +40,11 @@ public class Utils {
     }
 
     public static String getIpAddress() {
-        return "0.0.0.0";
+        return Config.IP_ADDRESS;
     }
 
     public static String getCountryCode() {
-        return "XX";
+        return Config.COUNTRY_CODE;
     }
 
     public static String readFile(String filename) {
@@ -102,10 +102,10 @@ public class Utils {
     }
 
     public static String getConvivaDebugKey() {
-        return readFile("convivaDebugKey.txt");
+        return Config.CONVIVA_API_KEY;
     }
 
     public static String getConvivaDebugGatewayUrl() {
-        return readFile("convivaDebugGatewayUrl.txt");
+        return Config.CONVIVA_GATEWAY_URL;
     }
 }

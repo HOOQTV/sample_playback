@@ -72,7 +72,8 @@ public class NetworkAgent {
         if(!TextUtils.isEmpty(sha256)) {
             CertificatePinner.Builder certificatePinnerBuilder = new CertificatePinner.Builder();
             certificatePinnerBuilder.add(hostname, "sha256/" + sha256);
-            httpClient.certificatePinner(certificatePinnerBuilder.build());
+            //TODO : Uncomment this code below to use Certificate Pinning
+//            httpClient.certificatePinner(certificatePinnerBuilder.build());
         }
 
         httpClient.addInterceptor(new BasicAuthInterceptor(authorization));
