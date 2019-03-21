@@ -3,6 +3,8 @@ package tv.hooq.sampleapp.commons;
 import java.util.HashMap;
 
 public class Config {
+
+    //TODO : Update this code with HOOQ API Key given
     public final static String API_KEY = "{your_api_key}";
 
     //TODO : Update this code with the Conviva API KEY
@@ -17,6 +19,9 @@ public class Config {
 
     //TODO : Get the IP dynamically or  hardcode your public IP
     public final static String IP_ADDRESS = "0.0.0.0";
+
+    //TODO : Change this value to use Certificate Pinning
+    public final static boolean USE_CERTIFICATE_PINNING = false;
 
     //TODO : Update this HMAC key, will be used in Sign In Request
     public final static HashMap<String, String> getSharedKeysHmac() {

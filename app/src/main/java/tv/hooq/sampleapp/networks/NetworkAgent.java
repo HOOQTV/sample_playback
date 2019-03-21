@@ -36,7 +36,7 @@ public class NetworkAgent {
     private static NetworkAgent instance;
 
     public static NetworkAgent getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new NetworkAgent();
         }
         return instance;
@@ -69,11 +69,10 @@ public class NetworkAgent {
         Uri uri = Uri.parse(baseUrl);
         String hostname = uri.getHost();
         String sha256 = BaseUrlSelector.getInstance().getSha256(hostname);
-        if(!TextUtils.isEmpty(sha256)) {
+        if (Config.USE_CERTIFICATE_PINNING && !TextUtils.isEmpty(sha256)) {
             CertificatePinner.Builder certificatePinnerBuilder = new CertificatePinner.Builder();
             certificatePinnerBuilder.add(hostname, "sha256/" + sha256);
-            //TODO : Uncomment this code below to use Certificate Pinning
-//            httpClient.certificatePinner(certificatePinnerBuilder.build());
+            httpClient.certificatePinner(certificatePinnerBuilder.build());
         }
 
         httpClient.addInterceptor(new BasicAuthInterceptor(authorization));
@@ -96,7 +95,7 @@ public class NetworkAgent {
 
             /* Authorization */
             String authorization = "";
-            if(TextUtils.isEmpty(credentials)) {
+            if (TextUtils.isEmpty(credentials)) {
                 String jwtLogin = SharedPreferencesManager.getInstance().getSanctuaryToken();
                 if (!TextUtils.isEmpty(jwtLogin)) {
                     authorization = "Bearer " + jwtLogin;
@@ -120,7 +119,7 @@ public class NetworkAgent {
     public Call<SignupResponse> signup(String email) {
         try {
             UserIdType userIdType = UserIdType.PHONE_NUMBER;
-            if(email.contains("@")) {
+            if (email.contains("@")) {
                 userIdType = UserIdType.EMAIL;
             }
             String password = "123456";
