@@ -4,6 +4,8 @@ import android.text.TextUtils;
 
 import java.util.HashMap;
 
+import tv.hooq.sampleapp.commons.Config;
+
 public class BaseUrlSelector {
     private static BaseUrlSelector instance;
 
@@ -21,10 +23,10 @@ public class BaseUrlSelector {
     public final static int ENVIRONMENT_PROD = 0;
     public final static int ENVIRONMENT_STAGGING = 1;
 
-    private final String ENDPOINT_API_SANDBOX_HOOQ = "api-sandbox.hooq.tv";
-    private final String ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ = "cdn-discover-nightly.hooq.tv";
+    private final String ENDPOINT_API_SANDBOX_HOOQ = Config.USE_API_NIGHTLY ? "api-sandbox.hooq.tv" : "api.hooq.tv";
+    private final String ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ = Config.USE_DISCOVER_NIGHTLY ? "cdn-discover-nightly.hooq.tv" : "cdn-discover.hooq.tv";
 
-    private HashMap<String,String> sha256s;
+    private HashMap<String, String> sha256s;
 
     public BaseUrlSelector() {
         sha256s = new HashMap<>();
@@ -56,7 +58,7 @@ public class BaseUrlSelector {
 
     private String httpModificator(String s) {
         if (!TextUtils.isEmpty(s)) {
-            if(USE_HTTPS) {
+            if (USE_HTTPS) {
                 return "https://" + s;
             } else {
                 return "http://" + s;

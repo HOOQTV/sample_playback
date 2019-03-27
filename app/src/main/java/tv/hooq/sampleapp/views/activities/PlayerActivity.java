@@ -84,6 +84,8 @@ import tv.hooq.sampleapp.views.exoplayer.SimpleExoPlayerView;
 public class PlayerActivity extends BaseActivity {
     public static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
+    public final String PREFERRED_DRM = Constants.DRM_DASH_WIDEVINE;
+
     private List<TextTrackItem> mSubtitles;
     private Data mMovieData;
 
@@ -286,7 +288,7 @@ public class PlayerActivity extends BaseActivity {
                     null);
 
             MediaSource textMediaSource = new SingleSampleMediaSource(
-                    Uri.parse(subtitle.getUri().replace(".m3u8", ".vtt")), //testing purpose
+                    Uri.parse(subtitle.getUri()), //testing purpose
                     mMediaDataSourceFactory,
                     subtitleFormat,
                     C.TIME_UNSET);
@@ -326,13 +328,22 @@ public class PlayerActivity extends BaseActivity {
         return aUrl[aUrl.length - 1];
     }
 
+    private int getContentType(String drmScheme) {
+        switch (drmScheme) {
+            case Constants.DRM_DASH_WIDEVINE: {
+                return C.TYPE_DASH;
+            }
+            default:
+                return -1;
+        }
+    }
+
     private MediaSource buildMediaSource(
             Uri uri,
             String overrideExtension,
             @Nullable Handler handler,
             @Nullable MediaSourceEventListener listener) {
-        @C.ContentType int type = TextUtils.isEmpty(overrideExtension) ? Util.inferContentType(uri)
-                : Util.inferContentType("." + overrideExtension);
+        @C.ContentType int type = getContentType(PREFERRED_DRM);
         switch (type) {
             case C.TYPE_DASH:
                 return new DashMediaSource.Factory(

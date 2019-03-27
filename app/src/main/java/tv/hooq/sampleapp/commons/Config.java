@@ -1,8 +1,12 @@
 package tv.hooq.sampleapp.commons;
 
-import java.util.HashMap;
+        import java.util.HashMap;
 
 public class Config {
+
+    //TODO : Update this code to use preferred endpoint
+    public final static boolean USE_API_NIGHTLY = true;
+    public final static boolean USE_DISCOVER_NIGHTLY = false;
 
     //TODO : Update this code with HOOQ API Key given
     public final static String API_KEY = "{your_api_key}";
@@ -22,6 +26,12 @@ public class Config {
 
     //TODO : Change this value to use Certificate Pinning
     public final static boolean USE_CERTIFICATE_PINNING = false;
+
+    //TODO : Change this value if want to activate user directly
+    public final static boolean WITH_ACTIVATE = false;
+
+    //TODO : Change this value to available SKU
+    public final static String SKU = "{{your_sku}}";
 
     //TODO : Update this HMAC key, will be used in Sign In Request
     public final static HashMap<String, String> getSharedKeysHmac() {
