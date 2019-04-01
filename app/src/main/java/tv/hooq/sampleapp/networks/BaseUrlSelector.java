@@ -23,8 +23,8 @@ public class BaseUrlSelector {
     public final static int ENVIRONMENT_PROD = 0;
     public final static int ENVIRONMENT_STAGGING = 1;
 
-    private final String ENDPOINT_API_SANDBOX_HOOQ = Config.USE_API_NIGHTLY ? "api-sandbox.hooq.tv" : "api.hooq.tv";
-    private final String ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ = Config.USE_DISCOVER_NIGHTLY ? "cdn-discover-nightly.hooq.tv" : "cdn-discover.hooq.tv";
+    private final String ENDPOINT_API_SANDBOX_HOOQ = Config.USE_API_SANDBOX ? "api-sandbox.hooq.tv" : "api.hooq.tv";
+    private final String ENDPOINT_CDN_DISCOVER_NIGHTLY_HOOQ = Config.USE_DISCOVER_SANDBOX ? "cdn-discover-nightly.hooq.tv" : "cdn-discover.hooq.tv";
 
     private HashMap<String, String> sha256s;
 

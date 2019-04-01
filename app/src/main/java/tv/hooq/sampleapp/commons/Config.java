@@ -4,9 +4,9 @@ package tv.hooq.sampleapp.commons;
 
 public class Config {
 
-    //TODO : Update this code to use preferred endpoint
-    public final static boolean USE_API_NIGHTLY = true;
-    public final static boolean USE_DISCOVER_NIGHTLY = false;
+    //TODO : Temporary, do not commit
+    public final static boolean USE_API_SANDBOX = true;
+    public final static boolean USE_DISCOVER_SANDBOX = false;
 
     //TODO : Update this code with HOOQ API Key given
     public final static String API_KEY = "{your_api_key}";
