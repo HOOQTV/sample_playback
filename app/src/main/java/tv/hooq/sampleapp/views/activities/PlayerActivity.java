@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -241,6 +243,12 @@ public class PlayerActivity extends BaseActivity {
                 if (drmSessionManager == null) {
                     setErrorListener(mContext.getResources().getString(errorStringId));
                     return;
+                }
+
+                // Prevent screen recording for DRM playback
+                SurfaceView surfaceView = (SurfaceView) mSimpleExoPlayerView.getVideoSurfaceView();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    surfaceView.setSecure(true);
                 }
             }
 
