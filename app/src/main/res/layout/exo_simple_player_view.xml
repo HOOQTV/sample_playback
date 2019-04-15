@@ -15,7 +15,7 @@
 -->
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <tv.hooq.sampleapp.views.exoplayer.AspectRatioFrameLayout android:id="@id/exo_content_frame"
+  <com.google.android.exoplayer2.ui.AspectRatioFrameLayout android:id="@id/exo_content_frame"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_gravity="center">
@@ -32,11 +32,11 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"/>
 
-    <tv.hooq.sampleapp.views.exoplayer.SubtitleView android:id="@id/exo_subtitles"
+    <com.google.android.exoplayer2.ui.SubtitleView android:id="@id/exo_subtitles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-  </tv.hooq.sampleapp.views.exoplayer.AspectRatioFrameLayout>
+  </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
 
   <View android:id="@id/exo_controller_placeholder"
       android:layout_width="match_parent"

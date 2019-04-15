@@ -48,6 +48,9 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.ui.DebugTextViewHelper;
+import com.google.android.exoplayer2.ui.PlaybackControlView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
@@ -77,9 +80,6 @@ import tv.hooq.sampleapp.players.exoplayer.ExoUtil;
 import tv.hooq.sampleapp.players.exoplayer.TrackSelectionHelper;
 import tv.hooq.sampleapp.trackings.ConvivaTrackingManager;
 import tv.hooq.sampleapp.trackings.PlayManifest;
-import tv.hooq.sampleapp.views.exoplayer.DebugTextViewHelper;
-import tv.hooq.sampleapp.views.exoplayer.PlaybackControlView;
-import tv.hooq.sampleapp.views.exoplayer.SimpleExoPlayerView;
 
 public class PlayerActivity extends BaseActivity {
     public static final String EXTRA_MOVIE = "EXTRA_MOVIE";
