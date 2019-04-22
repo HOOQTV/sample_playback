@@ -3,11 +3,14 @@ package tv.hooq.sampleapp.views.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaDrm;
+import android.media.UnsupportedSchemeException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.SurfaceView;
 import android.view.View;
@@ -235,6 +238,15 @@ public class PlayerActivity extends BaseActivity {
                         UUID drmSchemeUuid = ExoUtil.getInstance().getDrmUuid(drmScheme);
                         drmSessionManager = buildDrmSessionManagerV18(drmSchemeUuid, licenseUrl,
                                 keyRequestProperties, multiSession);
+
+                        // Prevent screen recording for DRM playback
+                        SurfaceView surfaceView = (SurfaceView) mSimpleExoPlayerView.getVideoSurfaceView();
+                        surfaceView.setSecure(true);
+
+                        // Prevent non widevine L1 devices from streaming higher than 720p content
+                        if (!isWidevineL1Supported()) {
+                            mDefaultTrackSelector.setParameters(new DefaultTrackSelector.Parameters().withMaxVideoSize(1280, 720));
+                        }
                     } catch (UnsupportedDrmException e) {
                         errorStringId = e.reason == UnsupportedDrmException.REASON_UNSUPPORTED_SCHEME
                                 ? R.string.error_drm_unsupported_scheme : R.string.error_drm_unknown;
@@ -243,12 +255,6 @@ public class PlayerActivity extends BaseActivity {
                 if (drmSessionManager == null) {
                     setErrorListener(mContext.getResources().getString(errorStringId));
                     return;
-                }
-
-                // Prevent screen recording for DRM playback
-                SurfaceView surfaceView = (SurfaceView) mSimpleExoPlayerView.getVideoSurfaceView();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    surfaceView.setSecure(true);
                 }
             }
 
@@ -326,6 +332,18 @@ public class PlayerActivity extends BaseActivity {
         mPlayer.prepare(mediaSourceFinal, !haveResumePosition, false);
         inErrorState = false;
         updateButtonVisibilities();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private boolean isWidevineL1Supported() {
+        try {
+            MediaDrm mediaDrm = new MediaDrm(C.WIDEVINE_UUID);
+            String securityLevel = mediaDrm.getPropertyString("securityLevel");
+            return securityLevel.equals("L1");
+        } catch (UnsupportedSchemeException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private String getExtension(String url) {
