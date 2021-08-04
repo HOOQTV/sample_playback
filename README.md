@@ -1,5 +1,7 @@
 # HOOQ Sample Playback App
 
+**Migrated to https://github.coupang.net/coupang/couplay-sample_playback**
+
 ##  CONFIGURATION
 Please set parameters needed before using this sample app.
 1. API KEY -> tv.hooq.sampleapp.commons.Config.java:API_KEY
