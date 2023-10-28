@@ -3,11 +3,16 @@ package tv.hooq.sampleapp.views.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaDrm;
+import android.media.UnsupportedSchemeException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -48,6 +53,9 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.ui.DebugTextViewHelper;
+import com.google.android.exoplayer2.ui.PlaybackControlView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
@@ -77,9 +85,6 @@ import tv.hooq.sampleapp.players.exoplayer.ExoUtil;
 import tv.hooq.sampleapp.players.exoplayer.TrackSelectionHelper;
 import tv.hooq.sampleapp.trackings.ConvivaTrackingManager;
 import tv.hooq.sampleapp.trackings.PlayManifest;
-import tv.hooq.sampleapp.views.exoplayer.DebugTextViewHelper;
-import tv.hooq.sampleapp.views.exoplayer.PlaybackControlView;
-import tv.hooq.sampleapp.views.exoplayer.SimpleExoPlayerView;
 
 public class PlayerActivity extends BaseActivity {
     public static final String EXTRA_MOVIE = "EXTRA_MOVIE";
@@ -233,6 +238,15 @@ public class PlayerActivity extends BaseActivity {
                         UUID drmSchemeUuid = ExoUtil.getInstance().getDrmUuid(drmScheme);
                         drmSessionManager = buildDrmSessionManagerV18(drmSchemeUuid, licenseUrl,
                                 keyRequestProperties, multiSession);
+
+                        // Prevent screen recording for DRM playback
+                        SurfaceView surfaceView = (SurfaceView) mSimpleExoPlayerView.getVideoSurfaceView();
+                        surfaceView.setSecure(true);
+
+                        // Prevent non widevine L1 devices from streaming higher than 720p content
+                        if (!isWidevineL1Supported()) {
+                            mDefaultTrackSelector.setParameters(new DefaultTrackSelector.Parameters().withMaxVideoSize(1280, 720));
+                        }
                     } catch (UnsupportedDrmException e) {
                         errorStringId = e.reason == UnsupportedDrmException.REASON_UNSUPPORTED_SCHEME
                                 ? R.string.error_drm_unsupported_scheme : R.string.error_drm_unknown;
@@ -318,6 +332,18 @@ public class PlayerActivity extends BaseActivity {
         mPlayer.prepare(mediaSourceFinal, !haveResumePosition, false);
         inErrorState = false;
         updateButtonVisibilities();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private boolean isWidevineL1Supported() {
+        try {
+            MediaDrm mediaDrm = new MediaDrm(C.WIDEVINE_UUID);
+            String securityLevel = mediaDrm.getPropertyString("securityLevel");
+            return securityLevel.equals("L1");
+        } catch (UnsupportedSchemeException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private String getExtension(String url) {
